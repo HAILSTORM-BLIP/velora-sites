@@ -40,7 +40,7 @@ const chapters = [
   {
     badge: "Customer flow",
     title: "The work should move itself.",
-    body: "Less chasing. Less admin. More growth.",
+    body: "Real inquiries. Routed instantly.",
     video: videos.automation,
     screen: "flow",
   },
@@ -323,7 +323,7 @@ function MacShowcase({ type }: { type: string }) {
             </div>
             <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/34">Velora intelligence</div>
           </div>
-          <div className="relative min-h-[360px] overflow-hidden p-5 md:min-h-[430px] md:p-7">
+          <div className="relative min-h-[285px] overflow-hidden p-3 md:min-h-[430px] md:p-7">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(244,241,234,.09),transparent_18rem),linear-gradient(rgba(255,255,255,.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.025)_1px,transparent_1px)] bg-[size:auto,42px_42px,42px_42px]" />
             <div className="relative">{type === "leak" && <LeakScreen />}</div>
             <div className="relative">{type === "growth" && <GrowthScreen />}</div>
@@ -338,43 +338,43 @@ function MacShowcase({ type }: { type: string }) {
 
 function LeakScreen() {
   return (
-    <div className="space-y-5">
+    <div className="space-y-3 md:space-y-5">
       <div className="screen-anim flex items-start justify-between gap-5">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-white/36">Current website</p>
-          <h3 className="mt-2 font-display text-3xl font-black uppercase tracking-[-0.04em] text-white md:text-5xl">Traffic leaks</h3>
+          <p className="text-[8px] uppercase tracking-[0.2em] text-white/36 md:text-[11px] md:tracking-[0.22em]">Current website</p>
+          <h3 className="mt-1 font-display text-[1.55rem] font-black uppercase leading-none tracking-[-0.04em] text-white md:mt-2 md:text-5xl"><span className="marker-danger">Traffic leaks</span></h3>
         </div>
-        <div className="rounded-full border border-[#f87171]/30 bg-[#f87171]/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#fca5a5]">-68% calls</div>
+        <div className="rounded-full border border-[#f87171]/30 bg-[#f87171]/10 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#fca5a5] md:px-3 md:text-xs md:tracking-[0.16em]">-68% calls</div>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3">
+      <div className="grid grid-cols-3 gap-2 md:gap-3">
         {[
           ["Visitors", "2,418", "High intent"],
           ["Calls", "19", "Too low"],
           ["Trust", "42%", "Weak first feel"],
         ].map(([label, value, note]) => (
-          <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.045] p-4" key={label}>
-            <p className="text-[10px] uppercase tracking-[0.18em] text-white/34">{label}</p>
-            <p className="mt-3 font-display text-3xl font-black tracking-[-0.04em] text-white">{value}</p>
-            <p className="mt-2 text-sm text-white/40">{note}</p>
+          <div className="screen-anim rounded-xl border border-[#ff3b30]/18 bg-[#ff3b30]/[0.055] p-2 shadow-[0_0_32px_rgba(255,59,48,.06)] md:rounded-2xl md:p-4" key={label}>
+            <p className="text-[7px] uppercase tracking-[0.12em] text-[#ffb4ae] md:text-[10px] md:tracking-[0.18em]"><span className="marker-danger-soft">{label}</span></p>
+            <p className="mt-1 font-display text-lg font-black tracking-[-0.04em] text-white md:mt-3 md:text-3xl">{value}</p>
+            <p className="mt-1 text-[10px] leading-tight text-white/40 md:mt-2 md:text-sm">{note}</p>
           </div>
         ))}
       </div>
 
-      <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.035] p-4">
-        <div className="mb-4 flex items-center justify-between">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-white/34">Visitor drop-off</p>
-          <p className="text-xs text-[#fca5a5]">People leave before contact</p>
+      <div className="screen-anim rounded-xl border border-white/10 bg-white/[0.035] p-3 md:rounded-2xl md:p-4">
+        <div className="mb-3 flex items-center justify-between gap-3 md:mb-4">
+          <p className="text-[8px] uppercase tracking-[0.16em] text-[#ffb4ae] md:text-[10px] md:tracking-[0.2em]"><span className="marker-danger-soft">Visitor drop-off</span></p>
+          <p className="text-[10px] text-[#fca5a5] md:text-xs">Leave before contact</p>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-2 md:space-y-3">
           {[
             ["Homepage view", "92%"],
             ["Service page", "41%"],
             ["Contact tap", "8%"],
           ].map(([label, width]) => (
             <div className="screen-anim" key={label}>
-              <div className="mb-2 flex justify-between text-sm text-white/54"><span>{label}</span><span>{width}</span></div>
-              <div className="h-2 overflow-hidden rounded-full bg-white/8"><div className="leak-bar h-full rounded-full bg-[#f4f1ea]/78" style={{ width }} /></div>
+              <div className="mb-1 flex justify-between text-[10px] text-white/54 md:mb-2 md:text-sm"><span>{label}</span><span>{width}</span></div>
+              <div className="h-1.5 overflow-hidden rounded-full bg-white/8 md:h-2"><div className="h-full rounded-full bg-[#ff3b30]/80 shadow-[0_0_18px_rgba(255,59,48,.24)]" style={{ width }} /></div>
             </div>
           ))}
         </div>
@@ -385,36 +385,62 @@ function LeakScreen() {
 
 function GrowthScreen() {
   return (
-    <div className="space-y-5">
+    <div className="space-y-3 md:space-y-5">
       <div className="screen-anim flex items-start justify-between gap-5">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-white/36">After Velora</p>
-          <h3 className="mt-2 font-display text-3xl font-black uppercase tracking-[-0.04em] text-white md:text-5xl">Momentum graph</h3>
+          <p className="text-[8px] uppercase tracking-[0.2em] text-white/36 md:text-[11px] md:tracking-[0.22em]">After Velora</p>
+          <h3 className="mt-1 font-display text-[1.55rem] font-black uppercase leading-none tracking-[-0.04em] text-white md:mt-2 md:text-5xl">Momentum graph</h3>
         </div>
-        <div className="rounded-full border border-[#86efac]/30 bg-[#22c55e]/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#bbf7d0]">+214% leads</div>
+        <div className="rounded-full border border-[#86efac]/30 bg-[#22c55e]/10 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#bbf7d0] md:px-3 md:text-xs md:tracking-[0.16em]">+214% leads</div>
       </div>
 
-      <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-        <div className="flex h-52 items-end gap-3">
-          {[24, 34, 42, 58, 72, 86, 94].map((height, index) => (
-            <div className="flex flex-1 flex-col items-center gap-3" key={height}>
-              <div className="growth-bar w-full rounded-t-xl bg-gradient-to-t from-[#f4f1ea]/45 to-[#f4f1ea]" style={{ height: `${height}%`, animationDelay: `${index * 0.12}s` }} />
-              <span className="text-[10px] uppercase text-white/28">W{index + 1}</span>
-            </div>
-          ))}
+      <div className="screen-anim rounded-xl border border-white/10 bg-white/[0.04] p-3 md:rounded-2xl md:p-4">
+        <div className="mb-3 flex items-center justify-between">
+          <p className="text-[8px] uppercase tracking-[0.16em] text-white/34 md:text-[10px] md:tracking-[0.2em]">Lead value chart</p>
+          <p className="text-[10px] font-semibold text-[#bbf7d0] md:text-xs">Velora intervention</p>
         </div>
+        <svg className="trading-chart h-36 w-full overflow-visible md:h-56" viewBox="0 0 640 250" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="chartGlow" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stopColor="#ef4444" />
+              <stop offset="48%" stopColor="#ef4444" />
+              <stop offset="58%" stopColor="#f4f1ea" />
+              <stop offset="100%" stopColor="#22c55e" />
+            </linearGradient>
+            <linearGradient id="chartArea" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="#22c55e" stopOpacity=".22" />
+              <stop offset="55%" stopColor="#22c55e" stopOpacity=".06" />
+              <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <g className="chart-grid" stroke="rgba(255,255,255,.06)" strokeWidth="1">
+            {[70, 140, 210, 280, 350, 420, 490, 560].map((x) => <line key={`x-${x}`} x1={x} x2={x} y1="0" y2="230" />)}
+            {[40, 82, 124, 166, 208].map((y) => <line key={`y-${y}`} x1="0" x2="640" y1={y} y2={y} />)}
+          </g>
+          <path className="chart-area" d="M20 176 C72 186 98 158 132 172 S206 202 254 162 S322 176 356 134 S444 118 488 82 S574 72 620 34 L620 230 L20 230 Z" fill="url(#chartArea)" />
+          <path className="chart-line-red" d="M20 176 C72 186 98 158 132 172 S206 202 254 162 S308 166 330 148" fill="none" stroke="#ef4444" strokeLinecap="round" strokeWidth="5" pathLength="1" />
+          <line className="chart-marker" x1="338" x2="338" y1="30" y2="220" stroke="rgba(244,241,234,.32)" strokeDasharray="5 8" />
+          <path className="chart-line-green" d="M338 146 C374 130 398 136 428 106 S488 82 522 72 S590 62 620 34" fill="none" stroke="#22c55e" strokeLinecap="round" strokeWidth="5" pathLength="1" />
+          <circle className="chart-dot" cx="620" cy="34" r="7" fill="#22c55e" />
+          <g fill="rgba(255,255,255,.28)" fontSize="12" fontWeight="800">
+            <text x="24" y="246">No site</text>
+            <text x="246" y="246">Manual work</text>
+            <text x="354" y="246">Velora</text>
+            <text x="548" y="246">Growth</text>
+          </g>
+        </svg>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3">
+      <div className="grid grid-cols-3 gap-2 md:gap-3">
         {[
           ["Response", "0:47", "avg time"],
           ["Booked", "38", "this month"],
           ["Follow-up", "100%", "automatic"],
         ].map(([label, value, note]) => (
-          <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.045] p-4" key={label}>
-            <p className="text-[10px] uppercase tracking-[0.18em] text-white/34">{label}</p>
-            <p className="mt-3 font-display text-3xl font-black tracking-[-0.04em] text-white">{value}</p>
-            <p className="mt-2 text-sm text-white/40">{note}</p>
+          <div className="screen-anim rounded-xl border border-white/10 bg-white/[0.045] p-2 md:rounded-2xl md:p-4" key={label}>
+            <p className="text-[7px] uppercase tracking-[0.12em] text-white/34 md:text-[10px] md:tracking-[0.18em]">{label}</p>
+            <p className="mt-1 font-display text-lg font-black tracking-[-0.04em] text-white md:mt-3 md:text-3xl">{value}</p>
+            <p className="mt-1 text-[10px] leading-tight text-white/40 md:mt-2 md:text-sm">{note}</p>
           </div>
         ))}
       </div>
@@ -426,44 +452,44 @@ function FlowScreen() {
   const customers = ["Nora wants pricing", "Arjun booked a call", "Maya asked for quote", "Omar needs follow-up"];
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-3 md:space-y-5">
       <div className="screen-anim flex items-start justify-between gap-5">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-white/36">Customer engine</p>
-          <h3 className="mt-2 font-display text-3xl font-black uppercase tracking-[-0.04em] text-white md:text-5xl">Demand in motion</h3>
+          <p className="text-[8px] uppercase tracking-[0.2em] text-white/36 md:text-[11px] md:tracking-[0.22em]">Customer engine</p>
+          <h3 className="mt-1 font-display text-[1.55rem] font-black uppercase leading-none tracking-[-0.04em] text-white md:mt-2 md:text-5xl">Demand in motion</h3>
         </div>
-        <div className="rounded-full border border-white/14 bg-white/8 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white/70">Live</div>
+        <div className="rounded-full border border-white/14 bg-white/8 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-white/70 md:px-3 md:text-xs md:tracking-[0.16em]">Live</div>
       </div>
 
-      <div className="screen-anim grid gap-4 md:grid-cols-[.8fr_1.2fr]">
-        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-white/34">Automation queue</p>
-          <div className="mt-5 space-y-3">
+      <div className="screen-anim grid grid-cols-[.78fr_1.22fr] gap-2 md:gap-4">
+        <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 md:rounded-2xl md:p-4">
+          <p className="text-[8px] uppercase tracking-[0.16em] text-white/34 md:text-[10px] md:tracking-[0.2em]">Queue</p>
+          <div className="mt-3 space-y-2 md:mt-5 md:space-y-3">
             {["Capture", "Qualify", "Route", "Follow up"].map((item, index) => (
               <div className="screen-anim flex items-center gap-3" key={item}>
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-[#f4f1ea] text-xs font-black text-[#050505]">{index + 1}</span>
-                <span className="text-sm font-semibold text-white/68">{item}</span>
+                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#f4f1ea] text-[9px] font-black text-[#050505] md:h-7 md:w-7 md:text-xs">{index + 1}</span>
+                <span className="text-[11px] font-semibold leading-tight text-white/68 md:text-sm">{item}</span>
               </div>
             ))}
           </div>
         </div>
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-4">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-white/34">Customers arriving</p>
-          <div className="mt-5 space-y-3">
+        <div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.035] p-3 md:rounded-2xl md:p-4">
+          <p className="text-[8px] uppercase tracking-[0.16em] text-white/34 md:text-[10px] md:tracking-[0.2em]">Customers</p>
+          <div className="mt-3 space-y-2 md:mt-5 md:space-y-3">
             {customers.map((customer, index) => (
-              <div className="customer-card screen-anim flex items-center justify-between rounded-xl border border-white/10 bg-[#0d0d12]/90 p-3" style={{ animationDelay: `${index * 0.28}s` }} key={customer}>
-                <span className="text-sm font-semibold text-white/72">{customer}</span>
-                <span className="rounded-full bg-[#f4f1ea]/10 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white/50">new</span>
+              <div className="customer-card screen-anim flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-[#0d0d12]/90 p-2 md:rounded-xl md:p-3" style={{ animationDelay: `${index * 0.28}s` }} key={customer}>
+                <span className="text-[11px] font-semibold leading-tight text-white/72 md:text-sm">{customer}</span>
+                <span className="rounded-full bg-[#f4f1ea]/10 px-1.5 py-0.5 text-[7px] font-bold uppercase tracking-[0.1em] text-white/50 md:px-2 md:py-1 md:text-[10px] md:tracking-[0.14em]">new</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+      <div className="screen-anim rounded-xl border border-white/10 bg-white/[0.04] p-3 md:rounded-2xl md:p-4">
         <div className="flex items-center justify-between">
-          <span className="text-sm text-white/44">Today</span>
-          <span className="font-display text-3xl font-black tracking-[-0.04em] text-white">14 booked actions</span>
+          <span className="text-xs text-white/44 md:text-sm">Today</span>
+          <span className="font-display text-xl font-black tracking-[-0.04em] text-white md:text-3xl">14 booked actions</span>
         </div>
       </div>
     </div>

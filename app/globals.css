@@ -64,27 +64,99 @@ video {
   transform-style: preserve-3d;
 }
 
-.leak-bar {
-  animation: leakBar 3.2s ease-in-out infinite;
+.marker-danger,
+.marker-danger-soft {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
 }
 
-.growth-bar {
-  transform-origin: bottom;
-  animation: growthBar 2.6s cubic-bezier(.22, 1, .36, 1) infinite;
+.marker-danger::before {
+  content: "";
+  position: absolute;
+  left: -0.07em;
+  right: -0.08em;
+  bottom: 0.04em;
+  z-index: -1;
+  height: 0.42em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 59, 48, 0.58), rgba(255, 149, 0, 0.22));
+  filter: blur(0.2px);
+  transform: rotate(-1.1deg);
+}
+
+.marker-danger-soft::before {
+  content: "";
+  position: absolute;
+  left: -0.16em;
+  right: -0.14em;
+  bottom: 0.02em;
+  z-index: -1;
+  height: 0.56em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 59, 48, 0.44), rgba(255, 149, 0, 0.16));
+  transform: rotate(-0.8deg);
+}
+
+.chart-line-red,
+.chart-line-green {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.chart-line-red {
+  animation: drawChart 1.35s cubic-bezier(.22, 1, .36, 1) 0.22s forwards;
+  filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.34));
+}
+
+.chart-line-green {
+  animation: drawChart 1.95s cubic-bezier(.22, 1, .36, 1) 1.05s forwards;
+  filter: drop-shadow(0 0 14px rgba(34, 197, 94, 0.32));
+}
+
+.chart-area {
+  opacity: 0;
+  animation: fadeChartArea 1.1s ease 2.15s forwards;
+}
+
+.chart-marker {
+  opacity: 0;
+  animation: fadeChartArea 0.65s ease 1s forwards;
+}
+
+.chart-dot {
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: chartDot 0.85s cubic-bezier(.22, 1, .36, 1) 2.75s forwards;
 }
 
 .customer-card {
   animation: customerFloat 4s cubic-bezier(.22, 1, .36, 1) infinite;
 }
 
-@keyframes leakBar {
-  0%, 100% { filter: brightness(.8); transform: scaleX(.9); transform-origin: left; }
-  50% { filter: brightness(1.2); transform: scaleX(1); transform-origin: left; }
+@keyframes drawChart {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
-@keyframes growthBar {
-  0% { transform: scaleY(.35); opacity: .55; }
-  42%, 100% { transform: scaleY(1); opacity: 1; }
+@keyframes fadeChartArea {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes chartDot {
+  from {
+    opacity: 0;
+    transform: scale(0.42);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes customerFloat {
