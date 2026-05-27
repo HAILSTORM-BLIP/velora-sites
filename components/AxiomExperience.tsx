@@ -153,7 +153,7 @@ export default function AxiomExperience() {
           scrollTrigger: {
             trigger: chapter,
             start: "top top",
-            end: () => `+=${Math.round(window.innerHeight * 3)}`,
+            end: () => `+=${Math.round(window.innerHeight * 2.25)}`,
             pin: true,
             pinSpacing: true,
             anticipatePin: 1,
@@ -499,11 +499,8 @@ function GrowthScreen() {
               );
             })}
           </g>
-          <path className="chart-area" d="M326 124 C366 110 386 112 414 88 S472 66 516 56 S584 48 620 30 L620 230 L326 230 Z" fill="url(#chartArea)" />
-          <path className="chart-line-red" d="M20 110 C58 120 70 132 98 150 S140 214 172 194 S212 128 248 142 S286 174 318 148" fill="none" stroke="#ef4444" strokeLinecap="round" strokeWidth="3.5" pathLength="1" />
+          <rect className="chart-area" x="326" y="34" width="294" height="196" fill="url(#chartArea)" />
           <line className="chart-marker" x1="338" x2="338" y1="30" y2="220" stroke="rgba(244,241,234,.32)" strokeDasharray="5 8" />
-          <path className="chart-line-green" d="M326 124 C366 110 386 112 414 88 S472 66 516 56 S584 48 620 30" fill="none" stroke="#22c55e" strokeLinecap="round" strokeWidth="3.5" pathLength="1" />
-          <circle className="chart-dot" cx="620" cy="30" r="7" fill="#22c55e" />
           <g fill="rgba(255,255,255,.28)" fontSize="12" fontWeight="800">
             <text x="24" y="246">No site</text>
             <text x="214" y="246">Manual work</text>
