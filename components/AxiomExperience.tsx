@@ -55,19 +55,19 @@ const painPoints = [
 ];
 
 const chartCandles = [
-  { x: 44, high: 142, low: 185, open: 158, close: 174, color: "red" },
-  { x: 76, high: 136, low: 178, open: 168, close: 154, color: "green" },
-  { x: 108, high: 130, low: 190, open: 148, close: 181, color: "red" },
-  { x: 142, high: 154, low: 206, open: 170, close: 194, color: "red" },
-  { x: 180, high: 150, low: 198, open: 184, close: 164, color: "green" },
-  { x: 224, high: 112, low: 168, open: 156, close: 124, color: "green" },
-  { x: 264, high: 96, low: 158, open: 118, close: 146, color: "red" },
-  { x: 316, high: 92, low: 142, open: 134, close: 108, color: "green" },
-  { x: 372, high: 82, low: 128, open: 118, close: 88, color: "green" },
-  { x: 420, high: 62, low: 112, open: 100, close: 72, color: "green" },
-  { x: 472, high: 54, low: 94, open: 82, close: 64, color: "green" },
-  { x: 524, high: 42, low: 82, open: 70, close: 52, color: "green" },
-  { x: 578, high: 24, low: 72, open: 58, close: 34, color: "green" },
+  { x: 44, high: 92, low: 138, open: 104, close: 126, color: "red" },
+  { x: 76, high: 118, low: 166, open: 130, close: 154, color: "red" },
+  { x: 108, high: 146, low: 196, open: 158, close: 184, color: "red" },
+  { x: 144, high: 170, low: 224, open: 188, close: 210, color: "red" },
+  { x: 184, high: 158, low: 214, open: 198, close: 174, color: "green" },
+  { x: 228, high: 128, low: 178, open: 162, close: 138, color: "green" },
+  { x: 272, high: 118, low: 172, open: 132, close: 160, color: "red" },
+  { x: 326, high: 110, low: 162, open: 150, close: 124, color: "green" },
+  { x: 378, high: 86, low: 138, open: 126, close: 98, color: "green" },
+  { x: 430, high: 66, low: 118, open: 106, close: 78, color: "green" },
+  { x: 482, high: 52, low: 98, open: 88, close: 64, color: "green" },
+  { x: 534, high: 38, low: 84, open: 72, close: 50, color: "green" },
+  { x: 586, high: 26, low: 72, open: 58, close: 36, color: "green" },
 ];
 
 export default function AxiomExperience() {
@@ -119,23 +119,29 @@ export default function AxiomExperience() {
         });
       });
 
-      gsap.from(".pain-card", {
-        y: 70,
-        rotateX: -18,
-        opacity: 0,
+      gsap.fromTo(".pain-card",
+        { y: 52, rotateX: -12, filter: "blur(8px)" },
+        {
+        y: 0,
+        rotateX: 0,
+        filter: "blur(0px)",
         duration: 1.25,
         stagger: 0.12,
         ease: "power4.out",
         scrollTrigger: { trigger: ".pain-grid", start: "top 78%" },
       });
 
-      gsap.from(".pain-title", {
-        clipPath: "inset(0 100% 0 0)",
-        duration: 1.05,
-        stagger: 0.14,
-        ease: "power4.inOut",
-        scrollTrigger: { trigger: ".pain-grid", start: "top 72%" },
-      });
+      gsap.fromTo(".pain-title",
+        { yPercent: 18, skewY: 3 },
+        {
+          yPercent: 0,
+          skewY: 0,
+          duration: 1.05,
+          stagger: 0.14,
+          ease: "power4.out",
+          scrollTrigger: { trigger: ".pain-grid", start: "top 72%" },
+        }
+      );
 
       gsap.utils.toArray<HTMLElement>(".chapter").forEach((chapter, index) => {
         const video = chapter.querySelector(".chapter-video");
@@ -147,8 +153,8 @@ export default function AxiomExperience() {
             trigger: chapter,
             start: "top top",
             end: "+=950",
-            pin: true,
-            scrub: 1,
+            pin: window.innerWidth >= 900,
+            scrub: 0.8,
           },
         });
 
@@ -272,12 +278,12 @@ export default function AxiomExperience() {
         </div>
         <div className="pain-grid relative mx-auto mt-20 grid max-w-6xl overflow-hidden border border-white/10 bg-white/[0.035] md:grid-cols-3">
           {painPoints.map(([title, body], index) => (
-            <div className="pain-card result-line relative flex min-h-56 flex-col items-center justify-center border-b border-white/10 px-6 py-10 text-center backdrop-blur-xl last:border-b-0 md:min-h-72 md:border-b-0 md:border-r md:border-white/10 md:last:border-r-0" key={title}>
+            <div className="pain-card relative flex min-h-52 flex-col items-center justify-center border-b border-white/10 px-4 py-9 text-center backdrop-blur-xl last:border-b-0 sm:min-h-56 md:min-h-72 md:border-b-0 md:border-r md:border-white/10 md:px-5 md:last:border-r-0" key={title}>
               <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/22 to-transparent" />
-              <h3 className="pain-title whitespace-nowrap font-serifDisplay text-[clamp(4rem,5.2vw,6.5rem)] leading-[0.88] tracking-[-0.035em] text-white">
+              <h3 className="pain-title whitespace-nowrap font-serifDisplay text-[clamp(2.9rem,11vw,6.5rem)] leading-[0.88] tracking-[-0.035em] text-white md:text-[clamp(3.8rem,4.75vw,6rem)]">
                 {title}
               </h3>
-              <p className="mx-auto mt-8 max-w-xs font-display text-xl font-black uppercase tracking-[-0.035em] text-white/78 md:text-2xl">{body}</p>
+              <p className="mx-auto mt-7 max-w-xs font-display text-lg font-black uppercase tracking-[-0.035em] text-white/78 md:mt-8 md:text-2xl">{body}</p>
             </div>
           ))}
         </div>
@@ -489,11 +495,11 @@ function GrowthScreen() {
               );
             })}
           </g>
-          <path className="chart-area" d="M20 176 C72 186 98 158 132 172 S206 202 254 162 S322 176 356 134 S444 118 488 82 S574 72 620 34 L620 230 L20 230 Z" fill="url(#chartArea)" />
-          <path className="chart-line-red" d="M20 176 C72 186 98 158 132 172 S206 202 254 162 S308 166 330 148" fill="none" stroke="#ef4444" strokeLinecap="round" strokeWidth="3.5" pathLength="1" />
+          <path className="chart-area" d="M326 124 C366 110 386 112 414 88 S472 66 516 56 S584 48 620 30 L620 230 L326 230 Z" fill="url(#chartArea)" />
+          <path className="chart-line-red" d="M20 110 C58 120 70 132 98 150 S140 214 172 194 S212 128 248 142 S286 174 318 148" fill="none" stroke="#ef4444" strokeLinecap="round" strokeWidth="3.5" pathLength="1" />
           <line className="chart-marker" x1="338" x2="338" y1="30" y2="220" stroke="rgba(244,241,234,.32)" strokeDasharray="5 8" />
-          <path className="chart-line-green" d="M338 146 C374 130 398 136 428 106 S488 82 522 72 S590 62 620 34" fill="none" stroke="#22c55e" strokeLinecap="round" strokeWidth="3.5" pathLength="1" />
-          <circle className="chart-dot" cx="620" cy="34" r="7" fill="#22c55e" />
+          <path className="chart-line-green" d="M326 124 C366 110 386 112 414 88 S472 66 516 56 S584 48 620 30" fill="none" stroke="#22c55e" strokeLinecap="round" strokeWidth="3.5" pathLength="1" />
+          <circle className="chart-dot" cx="620" cy="30" r="7" fill="#22c55e" />
           <g fill="rgba(255,255,255,.28)" fontSize="12" fontWeight="800">
             <text x="24" y="246">No site</text>
             <text x="214" y="246">Manual work</text>
