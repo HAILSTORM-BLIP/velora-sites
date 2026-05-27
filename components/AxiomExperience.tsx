@@ -54,7 +54,7 @@ const painPoints = [
   ["Manual work.", "Lost hours."],
 ];
 
-const painOffsets = ["md:-translate-y-8", "md:translate-y-0", "md:translate-y-8"];
+const painOffsets = ["md:pt-10", "md:pt-16", "md:pt-22"];
 
 const chartCandles = [
   { x: 44, high: 142, low: 185, open: 158, close: 174, color: "red" },
@@ -254,13 +254,14 @@ export default function AxiomExperience() {
             People buy from the business that feels easiest to trust.
           </p>
         </div>
-        <div className="relative mx-auto mt-20 grid max-w-5xl gap-px bg-white/12 md:grid-cols-3">
+        <div className="relative mx-auto mt-20 grid max-w-6xl overflow-hidden border border-white/10 bg-white/[0.035] md:grid-cols-3">
           {painPoints.map(([title, body], index) => (
-            <div className={`result-line bg-white/[0.035] p-8 text-center backdrop-blur-xl md:min-h-56 ${painOffsets[index]}`} key={title}>
-              <h3 className="font-serifDisplay text-5xl leading-[0.9] md:text-7xl">
+            <div className={`result-line relative flex min-h-56 flex-col items-center justify-start border-b border-white/10 px-6 py-10 text-center backdrop-blur-xl last:border-b-0 md:min-h-72 md:border-b-0 md:border-r md:border-white/10 md:last:border-r-0 ${painOffsets[index]}`} key={title}>
+              <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/22 to-transparent" />
+              <h3 className="font-serifDisplay text-[clamp(4rem,5.2vw,6.5rem)] leading-[0.88] tracking-[-0.035em] text-white">
                 {title === "Manual work." ? <><span className="block">Manual</span><span className="block">work.</span></> : <span className="whitespace-nowrap">{title}</span>}
               </h3>
-              <p className="mx-auto mt-6 max-w-xs font-display text-2xl font-black uppercase tracking-[-0.04em] text-white/80">{body}</p>
+              <p className="mx-auto mt-8 max-w-xs font-display text-xl font-black uppercase tracking-[-0.035em] text-white/78 md:text-2xl">{body}</p>
             </div>
           ))}
         </div>
