@@ -24,22 +24,25 @@ const work = [
 
 const chapters = [
   {
-    kicker: "",
+    badge: "Website signal",
     title: "They judge before they call.",
     body: "Make the first feeling expensive.",
     video: videos.website,
+    screen: "leak",
   },
   {
-    kicker: "",
+    badge: "Velora lift",
     title: "Interest should not go cold.",
     body: "Every lead moves while attention is still alive.",
     video: videos.leads,
+    screen: "growth",
   },
   {
-    kicker: "",
+    badge: "Customer flow",
     title: "The work should move itself.",
     body: "Less chasing. Less admin. More growth.",
     video: videos.automation,
+    screen: "flow",
   },
 ];
 
@@ -103,6 +106,8 @@ export default function AxiomExperience() {
       gsap.utils.toArray<HTMLElement>(".chapter").forEach((chapter, index) => {
         const video = chapter.querySelector(".chapter-video");
         const text = chapter.querySelectorAll(".chapter-text");
+        const device = chapter.querySelector(".mac-device");
+        const screenItems = chapter.querySelectorAll(".screen-anim");
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: chapter,
@@ -114,8 +119,11 @@ export default function AxiomExperience() {
         });
 
         tl.fromTo(video, { clipPath: "inset(12% 18% 12% 18%)", opacity: 0.18, scale: 1.16 }, { clipPath: "inset(0% 0% 0% 0%)", opacity: 0.56, scale: 1, ease: "power3.inOut" })
-          .from(text, { y: 58, opacity: 0, stagger: 0.08, ease: "power4.out" }, 0.16)
-          .to(text, { y: -36, ease: "none" }, 0.62);
+          .from(device, { y: 90, rotateX: 12, rotateY: index === 1 ? -8 : 8, opacity: 0, scale: 0.92, ease: "power4.out" }, 0.08)
+          .from(screenItems, { y: 22, opacity: 0, stagger: 0.055, ease: "power4.out" }, 0.2)
+          .from(text, { y: 58, opacity: 0, stagger: 0.08, ease: "power4.out" }, 0.22)
+          .to(device, { y: -34, rotateY: index === 1 ? 4 : -4, ease: "none" }, 0.58)
+          .to(text, { y: -28, ease: "none" }, 0.62);
       });
 
       gsap.to(".marquee-track", {
@@ -225,12 +233,18 @@ export default function AxiomExperience() {
             <source src={chapter.video} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(244,241,234,.075),transparent_30rem),linear-gradient(180deg,rgba(5,5,5,.5),rgba(5,5,5,.84))]" />
-          <div className={`relative z-10 flex min-h-[calc(100vh-10rem)] flex-col justify-center ${index === 0 ? "items-start text-left" : index === 1 ? "items-center text-center" : "items-end text-right"}`}>
-            <div className={`w-full ${index === 1 ? "mx-auto max-w-5xl" : "max-w-6xl"}`}>
-              <h2 className={`chapter-text max-w-5xl text-[clamp(3.5rem,8vw,8.2rem)] leading-[0.86] tracking-[-0.052em] ${index === 1 ? "mx-auto font-display font-black uppercase" : "font-serifDisplay"}`}>
+          <div className={`relative z-10 mx-auto grid min-h-[calc(100vh-10rem)] w-full max-w-7xl items-center gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] ${index === 1 ? "md:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)]" : ""}`}>
+            <div className={`${index === 1 ? "md:order-2" : ""}`}>
+              <MacShowcase type={chapter.screen} />
+            </div>
+            <div className={`chapter-copy ${index === 1 ? "md:order-1 md:text-right" : "md:text-left"} text-center`}>
+              <p className={`chapter-text mb-7 inline-flex rounded-full border border-white/12 bg-white/[0.055] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white/72 backdrop-blur-xl ${index === 1 ? "md:ml-auto" : ""}`}>
+                {chapter.badge}
+              </p>
+              <h2 className={`chapter-text text-[clamp(3rem,6.8vw,6.9rem)] leading-[0.86] tracking-[-0.052em] ${index === 1 ? "font-display font-black uppercase" : "font-serifDisplay"}`}>
                 {chapter.title}
               </h2>
-              <p className={`chapter-text mt-8 max-w-[18ch] font-display text-2xl font-black uppercase leading-[0.95] tracking-[-0.035em] text-white/76 md:text-4xl ${index === 1 ? "mx-auto" : index === 2 ? "ml-auto" : ""}`}>{chapter.body}</p>
+              <p className={`chapter-text mt-7 max-w-[20ch] font-display text-2xl font-black uppercase leading-[0.98] tracking-[-0.035em] text-white/72 md:text-3xl ${index === 1 ? "md:ml-auto" : ""}`}>{chapter.body}</p>
             </div>
           </div>
         </section>
@@ -293,6 +307,166 @@ export default function AxiomExperience() {
         </div>
       </section>
     </main>
+  );
+}
+
+function MacShowcase({ type }: { type: string }) {
+  return (
+    <div className="mac-device mx-auto max-w-3xl perspective-[1400px]">
+      <div className="rounded-[28px] border border-white/12 bg-[#15151d]/72 p-3 shadow-[0_40px_120px_rgba(0,0,0,.72)] backdrop-blur-2xl md:p-4">
+        <div className="overflow-hidden rounded-[20px] border border-white/10 bg-[#050507]">
+          <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.045] px-4 py-3">
+            <div className="flex gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/80" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]/80" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
+            </div>
+            <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/34">Velora intelligence</div>
+          </div>
+          <div className="relative min-h-[360px] overflow-hidden p-5 md:min-h-[430px] md:p-7">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(244,241,234,.09),transparent_18rem),linear-gradient(rgba(255,255,255,.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.025)_1px,transparent_1px)] bg-[size:auto,42px_42px,42px_42px]" />
+            <div className="relative">{type === "leak" && <LeakScreen />}</div>
+            <div className="relative">{type === "growth" && <GrowthScreen />}</div>
+            <div className="relative">{type === "flow" && <FlowScreen />}</div>
+          </div>
+        </div>
+      </div>
+      <div className="mx-auto h-5 w-[72%] rounded-b-[24px] bg-gradient-to-b from-[#1d1d25] to-[#09090c] shadow-[0_22px_70px_rgba(0,0,0,.6)]" />
+    </div>
+  );
+}
+
+function LeakScreen() {
+  return (
+    <div className="space-y-5">
+      <div className="screen-anim flex items-start justify-between gap-5">
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-white/36">Current website</p>
+          <h3 className="mt-2 font-display text-3xl font-black uppercase tracking-[-0.04em] text-white md:text-5xl">Traffic leaks</h3>
+        </div>
+        <div className="rounded-full border border-[#f87171]/30 bg-[#f87171]/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#fca5a5]">-68% calls</div>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-3">
+        {[
+          ["Visitors", "2,418", "High intent"],
+          ["Calls", "19", "Too low"],
+          ["Trust", "42%", "Weak first feel"],
+        ].map(([label, value, note]) => (
+          <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.045] p-4" key={label}>
+            <p className="text-[10px] uppercase tracking-[0.18em] text-white/34">{label}</p>
+            <p className="mt-3 font-display text-3xl font-black tracking-[-0.04em] text-white">{value}</p>
+            <p className="mt-2 text-sm text-white/40">{note}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+        <div className="mb-4 flex items-center justify-between">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-white/34">Visitor drop-off</p>
+          <p className="text-xs text-[#fca5a5]">People leave before contact</p>
+        </div>
+        <div className="space-y-3">
+          {[
+            ["Homepage view", "92%"],
+            ["Service page", "41%"],
+            ["Contact tap", "8%"],
+          ].map(([label, width]) => (
+            <div className="screen-anim" key={label}>
+              <div className="mb-2 flex justify-between text-sm text-white/54"><span>{label}</span><span>{width}</span></div>
+              <div className="h-2 overflow-hidden rounded-full bg-white/8"><div className="leak-bar h-full rounded-full bg-[#f4f1ea]/78" style={{ width }} /></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GrowthScreen() {
+  return (
+    <div className="space-y-5">
+      <div className="screen-anim flex items-start justify-between gap-5">
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-white/36">After Velora</p>
+          <h3 className="mt-2 font-display text-3xl font-black uppercase tracking-[-0.04em] text-white md:text-5xl">Momentum graph</h3>
+        </div>
+        <div className="rounded-full border border-[#86efac]/30 bg-[#22c55e]/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#bbf7d0]">+214% leads</div>
+      </div>
+
+      <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+        <div className="flex h-52 items-end gap-3">
+          {[24, 34, 42, 58, 72, 86, 94].map((height, index) => (
+            <div className="flex flex-1 flex-col items-center gap-3" key={height}>
+              <div className="growth-bar w-full rounded-t-xl bg-gradient-to-t from-[#f4f1ea]/45 to-[#f4f1ea]" style={{ height: `${height}%`, animationDelay: `${index * 0.12}s` }} />
+              <span className="text-[10px] uppercase text-white/28">W{index + 1}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-3">
+        {[
+          ["Response", "0:47", "avg time"],
+          ["Booked", "38", "this month"],
+          ["Follow-up", "100%", "automatic"],
+        ].map(([label, value, note]) => (
+          <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.045] p-4" key={label}>
+            <p className="text-[10px] uppercase tracking-[0.18em] text-white/34">{label}</p>
+            <p className="mt-3 font-display text-3xl font-black tracking-[-0.04em] text-white">{value}</p>
+            <p className="mt-2 text-sm text-white/40">{note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FlowScreen() {
+  const customers = ["Nora wants pricing", "Arjun booked a call", "Maya asked for quote", "Omar needs follow-up"];
+
+  return (
+    <div className="space-y-5">
+      <div className="screen-anim flex items-start justify-between gap-5">
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-white/36">Customer engine</p>
+          <h3 className="mt-2 font-display text-3xl font-black uppercase tracking-[-0.04em] text-white md:text-5xl">Demand in motion</h3>
+        </div>
+        <div className="rounded-full border border-white/14 bg-white/8 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white/70">Live</div>
+      </div>
+
+      <div className="screen-anim grid gap-4 md:grid-cols-[.8fr_1.2fr]">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-white/34">Automation queue</p>
+          <div className="mt-5 space-y-3">
+            {["Capture", "Qualify", "Route", "Follow up"].map((item, index) => (
+              <div className="screen-anim flex items-center gap-3" key={item}>
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-[#f4f1ea] text-xs font-black text-[#050505]">{index + 1}</span>
+                <span className="text-sm font-semibold text-white/68">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-white/34">Customers arriving</p>
+          <div className="mt-5 space-y-3">
+            {customers.map((customer, index) => (
+              <div className="customer-card screen-anim flex items-center justify-between rounded-xl border border-white/10 bg-[#0d0d12]/90 p-3" style={{ animationDelay: `${index * 0.28}s` }} key={customer}>
+                <span className="text-sm font-semibold text-white/72">{customer}</span>
+                <span className="rounded-full bg-[#f4f1ea]/10 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white/50">new</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="screen-anim rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-white/44">Today</span>
+          <span className="font-display text-3xl font-black tracking-[-0.04em] text-white">14 booked actions</span>
+        </div>
+      </div>
+    </div>
   );
 }
 

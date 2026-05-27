@@ -59,3 +59,35 @@ video {
 .chapter h2 {
   text-shadow: 0 14px 44px rgba(0, 0, 0, 0.35);
 }
+
+.mac-device {
+  transform-style: preserve-3d;
+}
+
+.leak-bar {
+  animation: leakBar 3.2s ease-in-out infinite;
+}
+
+.growth-bar {
+  transform-origin: bottom;
+  animation: growthBar 2.6s cubic-bezier(.22, 1, .36, 1) infinite;
+}
+
+.customer-card {
+  animation: customerFloat 4s cubic-bezier(.22, 1, .36, 1) infinite;
+}
+
+@keyframes leakBar {
+  0%, 100% { filter: brightness(.8); transform: scaleX(.9); transform-origin: left; }
+  50% { filter: brightness(1.2); transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes growthBar {
+  0% { transform: scaleY(.35); opacity: .55; }
+  42%, 100% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes customerFloat {
+  0%, 100% { transform: translateY(0); opacity: .68; }
+  45% { transform: translateY(-8px); opacity: 1; }
+}
