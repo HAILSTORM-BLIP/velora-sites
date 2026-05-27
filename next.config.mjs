@@ -6,7 +6,7 @@ const nextConfig = {
   basePath: isGithubPages ? "/velora-web" : "",
   assetPrefix: isGithubPages ? "/velora-web/" : "",
   turbopack: {
-    root: "C:/Users/Noor/Documents/jishan.builds",
+    root: process.cwd(),
   },
 };
 
