@@ -54,6 +54,24 @@ const painPoints = [
   ["Manual work.", "Lost hours."],
 ];
 
+const painOffsets = ["md:-translate-y-8", "md:translate-y-0", "md:translate-y-8"];
+
+const chartCandles = [
+  { x: 44, high: 142, low: 185, open: 158, close: 174, color: "red" },
+  { x: 76, high: 136, low: 178, open: 168, close: 154, color: "green" },
+  { x: 108, high: 130, low: 190, open: 148, close: 181, color: "red" },
+  { x: 142, high: 154, low: 206, open: 170, close: 194, color: "red" },
+  { x: 180, high: 150, low: 198, open: 184, close: 164, color: "green" },
+  { x: 224, high: 112, low: 168, open: 156, close: 124, color: "green" },
+  { x: 264, high: 96, low: 158, open: 118, close: 146, color: "red" },
+  { x: 316, high: 92, low: 142, open: 134, close: 108, color: "green" },
+  { x: 372, high: 82, low: 128, open: 118, close: 88, color: "green" },
+  { x: 420, high: 62, low: 112, open: 100, close: 72, color: "green" },
+  { x: 472, high: 54, low: 94, open: 82, close: 64, color: "green" },
+  { x: 524, high: 42, low: 82, open: 70, close: 52, color: "green" },
+  { x: 578, high: 24, low: 72, open: 58, close: 34, color: "green" },
+];
+
 export default function AxiomExperience() {
   const root = useRef<HTMLDivElement>(null);
 
@@ -134,7 +152,26 @@ export default function AxiomExperience() {
       });
     }, root);
 
-    return () => ctx.revert();
+    let lastScrollY = window.scrollY;
+    const onScroll = () => {
+      const nextScrollY = window.scrollY;
+      const goingDown = nextScrollY > lastScrollY && nextScrollY > 90;
+      gsap.to(".site-nav", {
+        yPercent: goingDown ? -125 : 0,
+        autoAlpha: goingDown ? 0 : 1,
+        duration: 0.55,
+        ease: "power4.out",
+        overwrite: true,
+      });
+      lastScrollY = nextScrollY;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -154,7 +191,7 @@ export default function AxiomExperience() {
         </div>
       </div>
 
-      <nav className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-5 mix-blend-difference md:px-10">
+      <nav className="site-nav fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-5 mix-blend-difference md:px-10">
         <a className="fade-up font-serifDisplay text-3xl leading-none text-white" href="#">Velora</a>
         <div className="fade-up hidden items-center gap-7 text-[10px] uppercase tracking-[0.28em] text-white/70 md:flex">
           <a href="#websites">Websites</a>
@@ -217,10 +254,12 @@ export default function AxiomExperience() {
             People buy from the business that feels easiest to trust.
           </p>
         </div>
-        <div className="relative mx-auto mt-16 grid max-w-5xl gap-px bg-white/12 md:grid-cols-3">
-          {painPoints.map(([title, body]) => (
-            <div className="result-line bg-white/[0.035] p-8 text-center backdrop-blur-xl md:min-h-56" key={title}>
-              <h3 className="font-serifDisplay text-5xl leading-none md:text-7xl">{title}</h3>
+        <div className="relative mx-auto mt-20 grid max-w-5xl gap-px bg-white/12 md:grid-cols-3">
+          {painPoints.map(([title, body], index) => (
+            <div className={`result-line bg-white/[0.035] p-8 text-center backdrop-blur-xl md:min-h-56 ${painOffsets[index]}`} key={title}>
+              <h3 className="font-serifDisplay text-5xl leading-[0.9] md:text-7xl">
+                {title === "Manual work." ? <><span className="block">Manual</span><span className="block">work.</span></> : <span className="whitespace-nowrap">{title}</span>}
+              </h3>
               <p className="mx-auto mt-6 max-w-xs font-display text-2xl font-black uppercase tracking-[-0.04em] text-white/80">{body}</p>
             </div>
           ))}
@@ -238,7 +277,7 @@ export default function AxiomExperience() {
               <MacShowcase type={chapter.screen} />
             </div>
             <div className={`chapter-copy ${index === 1 ? "md:order-1 md:text-right" : "md:text-left"} text-center`}>
-              <p className={`chapter-text mb-7 inline-flex rounded-full border border-white/12 bg-white/[0.055] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white/72 backdrop-blur-xl ${index === 1 ? "md:ml-auto" : ""}`}>
+              <p className={`chapter-text liquid-pill mb-7 inline-flex px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white/76 ${index === 1 ? "md:ml-auto" : ""}`}>
                 {chapter.badge}
               </p>
               <h2 className={`chapter-text text-[clamp(3rem,6.8vw,6.9rem)] leading-[0.86] tracking-[-0.052em] ${index === 1 ? "font-display font-black uppercase" : "font-serifDisplay"}`}>
@@ -276,29 +315,29 @@ export default function AxiomExperience() {
             </p>
             <div className="mx-auto mt-8 grid max-w-sm gap-3 text-left md:mx-0">
               {contactWins.map((item) => (
-                <div className="border-t border-white/12 py-3 text-[11px] font-bold uppercase tracking-[0.24em] text-white/62" key={item}>{item}</div>
+                <div className="border-t border-white/12 py-3 text-[11px] font-bold uppercase tracking-[0.24em] text-white/72" key={item}><span className="marker-danger-soft">{item}</span></div>
               ))}
             </div>
           </div>
 
-          <form className="border border-white/12 bg-white/[0.035] p-5 backdrop-blur-xl md:p-8" onSubmit={(event) => event.preventDefault()}>
+          <form className="rounded-[18px] border border-white/12 bg-white/[0.035] p-5 backdrop-blur-xl md:p-8" onSubmit={(event) => event.preventDefault()}>
             <div className="grid gap-5 md:grid-cols-2">
               <label className="group block">
                 <span className="text-[10px] uppercase tracking-[0.28em] text-white/38">Name</span>
-                <input className="mt-3 w-full border-b border-white/16 bg-transparent py-3 text-base text-white/90 outline-none transition placeholder:text-white/42 focus:border-white/70 md:text-lg" name="name" placeholder="Your name" />
+                <input className="mt-3 w-full border-b border-white/16 bg-transparent py-3 font-display text-sm tracking-[-0.02em] text-white/90 outline-none transition placeholder:text-sm placeholder:text-white/42 focus:border-white/70 md:text-base" name="name" placeholder="Your name" />
               </label>
               <label className="group block">
                 <span className="text-[10px] uppercase tracking-[0.28em] text-white/38">Email</span>
-                <input className="mt-3 w-full border-b border-white/16 bg-transparent py-3 text-base text-white/90 outline-none transition placeholder:text-white/42 focus:border-white/70 md:text-lg" name="email" type="email" placeholder="you@brand.com" />
+                <input className="mt-3 w-full border-b border-white/16 bg-transparent py-3 font-display text-sm tracking-[-0.02em] text-white/90 outline-none transition placeholder:text-sm placeholder:text-white/42 focus:border-white/70 md:text-base" name="email" type="email" placeholder="you@brand.com" />
               </label>
             </div>
             <label className="mt-7 block">
               <span className="text-[10px] uppercase tracking-[0.28em] text-white/38">Business</span>
-              <input className="mt-3 w-full border-b border-white/16 bg-transparent py-3 text-base text-white/90 outline-none transition placeholder:text-white/42 focus:border-white/70 md:text-lg" name="business" placeholder="What do you run?" />
+              <input className="mt-3 w-full border-b border-white/16 bg-transparent py-3 font-display text-sm tracking-[-0.02em] text-white/90 outline-none transition placeholder:text-sm placeholder:text-white/42 focus:border-white/70 md:text-base" name="business" placeholder="What do you run?" />
             </label>
             <label className="mt-7 block">
               <span className="text-[10px] uppercase tracking-[0.28em] text-white/38">What do you want fixed?</span>
-              <textarea className="mt-3 min-h-32 w-full resize-none border-b border-white/16 bg-transparent py-3 text-base leading-7 text-white/90 outline-none transition placeholder:text-white/42 focus:border-white/70 md:text-lg" name="message" placeholder="Website, more calls, automation, or all of it." />
+              <textarea className="mt-3 min-h-32 w-full resize-none border-b border-white/16 bg-transparent py-3 font-display text-sm leading-7 tracking-[-0.02em] text-white/90 outline-none transition placeholder:text-sm placeholder:text-white/42 focus:border-white/70 md:text-base" name="message" placeholder="Website, more calls, automation, or all of it." />
             </label>
             <button className="mt-8 inline-flex w-full items-center justify-center gap-3 bg-[#f4f1ea] px-7 py-5 text-[11px] font-bold uppercase tracking-[0.24em] text-[#050505] transition hover:bg-white md:w-auto" type="submit">
               Start a project <ArrowUpRight size={15} />
@@ -313,13 +352,13 @@ export default function AxiomExperience() {
 function MacShowcase({ type }: { type: string }) {
   return (
     <div className="mac-device mx-auto max-w-3xl perspective-[1400px]">
-      <div className="rounded-[28px] border border-white/12 bg-[#15151d]/72 p-3 shadow-[0_40px_120px_rgba(0,0,0,.72)] backdrop-blur-2xl md:p-4">
-        <div className="overflow-hidden rounded-[20px] border border-white/10 bg-[#050507]">
+      <div className="liquid-device rounded-[28px] p-3 shadow-[0_40px_120px_rgba(0,0,0,.72)] md:p-4">
+        <div className="liquid-screen overflow-hidden rounded-[20px]">
           <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.045] px-4 py-3">
             <div className="flex gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
+              <span className="mac-dot mac-close">×</span>
+              <span className="mac-dot mac-min" />
+              <span className="mac-dot mac-go" />
             </div>
             <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/34">Velora intelligence</div>
           </div>
@@ -397,7 +436,10 @@ function GrowthScreen() {
       <div className="screen-anim rounded-xl border border-white/10 bg-white/[0.04] p-3 md:rounded-2xl md:p-4">
         <div className="mb-3 flex items-center justify-between">
           <p className="text-[8px] uppercase tracking-[0.16em] text-white/34 md:text-[10px] md:tracking-[0.2em]">Lead value chart</p>
-          <p className="text-[10px] font-semibold text-[#bbf7d0] md:text-xs">Velora intervention</p>
+          <div className="flex gap-3 text-[9px] font-bold uppercase tracking-[0.12em] md:text-xs">
+            <span className="text-[#ff5a52]">Before Velora</span>
+            <span className="text-[#86efac]">After Velora</span>
+          </div>
         </div>
         <svg className="trading-chart h-36 w-full overflow-visible md:h-56" viewBox="0 0 640 250" preserveAspectRatio="none" aria-hidden="true">
           <defs>
@@ -417,14 +459,27 @@ function GrowthScreen() {
             {[70, 140, 210, 280, 350, 420, 490, 560].map((x) => <line key={`x-${x}`} x1={x} x2={x} y1="0" y2="230" />)}
             {[40, 82, 124, 166, 208].map((y) => <line key={`y-${y}`} x1="0" x2="640" y1={y} y2={y} />)}
           </g>
+          <g className="chart-candles">
+            {chartCandles.map((candle) => {
+              const top = Math.min(candle.open, candle.close);
+              const height = Math.max(Math.abs(candle.open - candle.close), 7);
+              const color = candle.color === "green" ? "#22c55e" : "#ef4444";
+              return (
+                <g className="chart-candle" style={{ animationDelay: `${candle.x / 420}s` }} key={candle.x}>
+                  <line x1={candle.x} x2={candle.x} y1={candle.high} y2={candle.low} stroke={color} strokeLinecap="round" strokeWidth="2" />
+                  <rect x={candle.x - 5} y={top} width="10" height={height} rx="2" fill={color} opacity=".88" />
+                </g>
+              );
+            })}
+          </g>
           <path className="chart-area" d="M20 176 C72 186 98 158 132 172 S206 202 254 162 S322 176 356 134 S444 118 488 82 S574 72 620 34 L620 230 L20 230 Z" fill="url(#chartArea)" />
-          <path className="chart-line-red" d="M20 176 C72 186 98 158 132 172 S206 202 254 162 S308 166 330 148" fill="none" stroke="#ef4444" strokeLinecap="round" strokeWidth="5" pathLength="1" />
+          <path className="chart-line-red" d="M20 176 C72 186 98 158 132 172 S206 202 254 162 S308 166 330 148" fill="none" stroke="#ef4444" strokeLinecap="round" strokeWidth="3.5" pathLength="1" />
           <line className="chart-marker" x1="338" x2="338" y1="30" y2="220" stroke="rgba(244,241,234,.32)" strokeDasharray="5 8" />
-          <path className="chart-line-green" d="M338 146 C374 130 398 136 428 106 S488 82 522 72 S590 62 620 34" fill="none" stroke="#22c55e" strokeLinecap="round" strokeWidth="5" pathLength="1" />
+          <path className="chart-line-green" d="M338 146 C374 130 398 136 428 106 S488 82 522 72 S590 62 620 34" fill="none" stroke="#22c55e" strokeLinecap="round" strokeWidth="3.5" pathLength="1" />
           <circle className="chart-dot" cx="620" cy="34" r="7" fill="#22c55e" />
           <g fill="rgba(255,255,255,.28)" fontSize="12" fontWeight="800">
             <text x="24" y="246">No site</text>
-            <text x="246" y="246">Manual work</text>
+            <text x="214" y="246">Manual work</text>
             <text x="354" y="246">Velora</text>
             <text x="548" y="246">Growth</text>
           </g>
@@ -458,7 +513,7 @@ function FlowScreen() {
           <p className="text-[8px] uppercase tracking-[0.2em] text-white/36 md:text-[11px] md:tracking-[0.22em]">Customer engine</p>
           <h3 className="mt-1 font-display text-[1.55rem] font-black uppercase leading-none tracking-[-0.04em] text-white md:mt-2 md:text-5xl">Demand in motion</h3>
         </div>
-        <div className="rounded-full border border-white/14 bg-white/8 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-white/70 md:px-3 md:text-xs md:tracking-[0.16em]">Live</div>
+        <div className="rounded-full border border-[#86efac]/35 bg-[#22c55e]/18 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#bbf7d0] shadow-[0_0_18px_rgba(34,197,94,.12)] md:px-3 md:text-xs md:tracking-[0.16em]">Live</div>
       </div>
 
       <div className="screen-anim grid grid-cols-[.78fr_1.22fr] gap-2 md:gap-4">
@@ -479,7 +534,7 @@ function FlowScreen() {
             {customers.map((customer, index) => (
               <div className="customer-card screen-anim flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-[#0d0d12]/90 p-2 md:rounded-xl md:p-3" style={{ animationDelay: `${index * 0.28}s` }} key={customer}>
                 <span className="text-[11px] font-semibold leading-tight text-white/72 md:text-sm">{customer}</span>
-                <span className="rounded-full bg-[#f4f1ea]/10 px-1.5 py-0.5 text-[7px] font-bold uppercase tracking-[0.1em] text-white/50 md:px-2 md:py-1 md:text-[10px] md:tracking-[0.14em]">new</span>
+                <span className="rounded-full bg-[#ef4444] px-1.5 py-0.5 text-[7px] font-bold uppercase tracking-[0.1em] text-white shadow-[0_0_14px_rgba(239,68,68,.22)] md:px-2 md:py-1 md:text-[10px] md:tracking-[0.14em]">new</span>
               </div>
             ))}
           </div>
