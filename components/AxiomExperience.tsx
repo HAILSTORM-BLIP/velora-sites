@@ -144,6 +144,7 @@ export default function AxiomExperience() {
       );
 
       gsap.utils.toArray<HTMLElement>(".chapter").forEach((chapter, index) => {
+        const isCompact = window.matchMedia("(max-width: 899px)").matches;
         const video = chapter.querySelector(".chapter-video");
         const text = chapter.querySelectorAll(".chapter-text");
         const device = chapter.querySelector(".mac-device");
@@ -152,18 +153,21 @@ export default function AxiomExperience() {
           scrollTrigger: {
             trigger: chapter,
             start: "top top",
-            end: "+=950",
-            pin: window.innerWidth >= 900,
-            scrub: 0.8,
+            end: () => `+=${Math.round(window.innerHeight * 3)}`,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            scrub: 0.9,
           },
         });
 
-        tl.fromTo(video, { clipPath: "inset(12% 18% 12% 18%)", opacity: 0.18, scale: 1.16 }, { clipPath: "inset(0% 0% 0% 0%)", opacity: 0.56, scale: 1, ease: "power3.inOut" })
-          .from(device, { y: 90, rotateX: 12, rotateY: index === 1 ? -8 : 8, opacity: 0, scale: 0.92, ease: "power4.out" }, 0.08)
+        tl.fromTo(video, { clipPath: isCompact ? "inset(0% 0% 0% 0%)" : "inset(12% 18% 12% 18%)", opacity: 0.18, scale: isCompact ? 1.06 : 1.16 }, { clipPath: "inset(0% 0% 0% 0%)", opacity: 0.56, scale: 1, ease: "power3.inOut" })
+          .from(device, { y: isCompact ? 42 : 90, rotateX: isCompact ? 5 : 12, rotateY: index === 1 ? -8 : 8, opacity: 0, scale: isCompact ? 0.97 : 0.92, ease: "power4.out" }, 0.08)
           .from(screenItems, { y: 22, opacity: 0, stagger: 0.055, ease: "power4.out" }, 0.2)
-          .from(text, { y: 58, opacity: 0, stagger: 0.08, ease: "power4.out" }, 0.22)
-          .to(device, { y: -34, rotateY: index === 1 ? 4 : -4, ease: "none" }, 0.58)
-          .to(text, { y: -28, ease: "none" }, 0.62);
+          .from(text, { y: isCompact ? 34 : 58, opacity: 0, stagger: 0.08, ease: "power4.out" }, 0.22)
+          .to(device, { y: isCompact ? -8 : -24, rotateY: isCompact ? 0 : index === 1 ? 3 : -3, ease: "none" }, 0.58)
+          .to(text, { y: isCompact ? -6 : -18, ease: "none" }, 0.62);
       });
 
       gsap.to(".marquee-track", {
@@ -290,12 +294,12 @@ export default function AxiomExperience() {
       </section>
 
       {chapters.map((chapter, index) => (
-        <section className="chapter relative min-h-screen overflow-hidden bg-[#050505] px-5 py-20 text-[#f4f1ea] md:px-10" id={index === 1 ? "automation" : undefined} key={chapter.title}>
+        <section className="chapter relative min-h-[100svh] overflow-hidden bg-[#050505] px-5 py-12 text-[#f4f1ea] md:min-h-screen md:px-10 md:py-20" id={index === 1 ? "automation" : undefined} key={chapter.title}>
           <video className="chapter-video absolute inset-0 h-full w-full object-cover opacity-40" autoPlay muted loop playsInline preload="metadata" poster="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1800">
             <source src={chapter.video} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(244,241,234,.075),transparent_30rem),linear-gradient(180deg,rgba(5,5,5,.5),rgba(5,5,5,.84))]" />
-          <div className={`relative z-10 mx-auto grid min-h-[calc(100vh-10rem)] w-full max-w-7xl items-center gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] ${index === 1 ? "md:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)]" : ""}`}>
+          <div className={`relative z-10 mx-auto grid min-h-[calc(100svh-6rem)] w-full max-w-7xl items-center gap-8 md:min-h-[calc(100vh-10rem)] md:gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] ${index === 1 ? "md:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)]" : ""}`}>
             <div className={`${index === 1 ? "md:order-2" : ""}`}>
               <MacShowcase type={chapter.screen} />
             </div>
