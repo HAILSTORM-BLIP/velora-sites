@@ -54,8 +54,6 @@ const painPoints = [
   ["Manual work.", "Lost hours."],
 ];
 
-const painOffsets = ["md:pt-10", "md:pt-16", "md:pt-22"];
-
 const chartCandles = [
   { x: 44, high: 142, low: 185, open: 158, close: 174, color: "red" },
   { x: 76, high: 136, low: 178, open: 168, close: 154, color: "green" },
@@ -119,6 +117,24 @@ export default function AxiomExperience() {
           ease: "power4.out",
           scrollTrigger: { trigger: line, start: "top 82%" },
         });
+      });
+
+      gsap.from(".pain-card", {
+        y: 70,
+        rotateX: -18,
+        opacity: 0,
+        duration: 1.25,
+        stagger: 0.12,
+        ease: "power4.out",
+        scrollTrigger: { trigger: ".pain-grid", start: "top 78%" },
+      });
+
+      gsap.from(".pain-title", {
+        clipPath: "inset(0 100% 0 0)",
+        duration: 1.05,
+        stagger: 0.14,
+        ease: "power4.inOut",
+        scrollTrigger: { trigger: ".pain-grid", start: "top 72%" },
       });
 
       gsap.utils.toArray<HTMLElement>(".chapter").forEach((chapter, index) => {
@@ -254,12 +270,12 @@ export default function AxiomExperience() {
             People buy from the business that feels easiest to trust.
           </p>
         </div>
-        <div className="relative mx-auto mt-20 grid max-w-6xl overflow-hidden border border-white/10 bg-white/[0.035] md:grid-cols-3">
+        <div className="pain-grid relative mx-auto mt-20 grid max-w-6xl overflow-hidden border border-white/10 bg-white/[0.035] md:grid-cols-3">
           {painPoints.map(([title, body], index) => (
-            <div className={`result-line relative flex min-h-56 flex-col items-center justify-start border-b border-white/10 px-6 py-10 text-center backdrop-blur-xl last:border-b-0 md:min-h-72 md:border-b-0 md:border-r md:border-white/10 md:last:border-r-0 ${painOffsets[index]}`} key={title}>
+            <div className="pain-card result-line relative flex min-h-56 flex-col items-center justify-center border-b border-white/10 px-6 py-10 text-center backdrop-blur-xl last:border-b-0 md:min-h-72 md:border-b-0 md:border-r md:border-white/10 md:last:border-r-0" key={title}>
               <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/22 to-transparent" />
-              <h3 className="font-serifDisplay text-[clamp(4rem,5.2vw,6.5rem)] leading-[0.88] tracking-[-0.035em] text-white">
-                {title === "Manual work." ? <><span className="block">Manual</span><span className="block">work.</span></> : <span className="whitespace-nowrap">{title}</span>}
+              <h3 className="pain-title whitespace-nowrap font-serifDisplay text-[clamp(4rem,5.2vw,6.5rem)] leading-[0.88] tracking-[-0.035em] text-white">
+                {title}
               </h3>
               <p className="mx-auto mt-8 max-w-xs font-display text-xl font-black uppercase tracking-[-0.035em] text-white/78 md:text-2xl">{body}</p>
             </div>
