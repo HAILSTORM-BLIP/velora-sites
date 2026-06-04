@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Velora | Websites and Automation",
+  title: "Jishan Builds | Simple Cinematic Websites",
   description:
-    "Velora builds premium websites and business automation systems for modern companies.",
+    "A dark, cinematic website concept for simple premium landing pages with restrained motion, clear copy, and one strong call to action.",
 };
 
 export default function RootLayout({
