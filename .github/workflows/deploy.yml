@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy sites to GitHub Pages
 
 on:
   push:
@@ -22,19 +22,43 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node for portfolio
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: npm
 
-      - name: Install dependencies
+      - name: Install portfolio dependencies
         run: npm ci
 
-      - name: Build static site
+      - name: Build portfolio site
         run: npm run build
         env:
           GITHUB_PAGES: "true"
+          GITHUB_PAGES_BASE_PATH: "/velora-sites"
+
+      - name: Setup Node cache for cafe
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: cafe/package-lock.json
+
+      - name: Install cafe dependencies
+        run: npm ci
+        working-directory: cafe
+
+      - name: Build cafe site
+        run: npm run build
+        working-directory: cafe
+        env:
+          GITHUB_PAGES: "true"
+
+      - name: Add cafe site to Pages artifact
+        run: |
+          New-Item -ItemType Directory -Force -Path out/cafe
+          Copy-Item -Recurse -Force cafe/dist/* out/cafe/
+        shell: pwsh
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -1,7 +1,7 @@
 {
-  "name": "velora-web",
+  "name": "velora-sites",
   "version": "1.0.0",
-  "description": "Cinematic AI automation agency website.",
+  "description": "Collection of Velora websites with GitHub Pages deployment.",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -17,19 +17,19 @@
     "framer-motion": "^12.40.0",
     "gsap": "^3.15.0",
     "lucide-react": "^1.16.0",
-    "next": "^16.2.6",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
+    "next": "^15.5.19",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "three": "^0.184.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.0",
     "@types/node": "^25.9.1",
-    "@types/react": "^19.2.15",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^18.3.30",
+    "@types/react-dom": "^18.3.7",
     "autoprefixer": "^10.5.0",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.6",
+    "eslint-config-next": "^15.5.19",
     "postcss": "^8.5.15",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3"

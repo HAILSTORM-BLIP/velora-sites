@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Jishan Builds | Simple Cinematic Websites",
+  title: "Armaan Tamboli | Mechanical Design Engineer",
   description:
-    "A dark, cinematic website concept for simple premium landing pages with restrained motion, clear copy, and one strong call to action.",
+    "A premium mechanical engineering portfolio showcasing CAD, simulation, product design, manufacturing drawings, and precision-engineered assemblies.",
 };
 
 export default function RootLayout({
