@@ -1,5 +1,5 @@
-import MechanicalPortfolio from "@/components/MechanicalPortfolio";
+import AxiomExperience from "@/components/AxiomExperience";
 
 export default function Home() {
-  return <MechanicalPortfolio />;
+  return <AxiomExperience />;
 }
