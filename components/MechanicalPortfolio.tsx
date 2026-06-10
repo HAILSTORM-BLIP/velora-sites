@@ -88,30 +88,38 @@ const projects = [
   },
 ];
 
-const demoSites = [
+const completedWork = [
   {
     title: "Mechanical Portfolio",
-    type: "Main site",
+    type: "Main website",
     href: "https://hailstorm-blip.github.io/velora-web/",
-    copy: "Premium engineering portfolio with CAD projects, process, skills, and contact flow.",
+    stack: "Next.js / Framer Motion / Tailwind",
+    copy: "A polished engineering portfolio with a cinematic hero, animated CAD project carousel, skills dashboard, process timeline, and contact flow.",
+    result: "Built as the central hub for all public Velora demos.",
   },
   {
     title: "Flavored Cafe",
-    type: "Demo site",
+    type: "Demo website",
     href: "https://hailstorm-blip.github.io/velora-web/cafe/",
-    copy: "Animated cafe landing page with menu cards, loader video, product visuals, and ordering-style sections.",
+    stack: "Vite / React / GSAP",
+    copy: "A warm cafe landing page with intro video loading, animated menu cards, product visuals, mobile-ordering style sections, and smooth scroll reveals.",
+    result: "Connected as a live demo from the main portfolio.",
   },
   {
     title: "Velora Sites Archive",
-    type: "Repository mirror",
+    type: "Site collection",
     href: "https://hailstorm-blip.github.io/velora-sites/",
-    copy: "The consolidated Pages archive that also carries the shared site collection.",
+    stack: "GitHub Pages / Static export",
+    copy: "A consolidated public archive that keeps the built websites together, with shared deployment workflow and source organization.",
+    result: "Maintains the complete site collection for review.",
   },
   {
     title: "Vercel Production",
-    type: "Live deployment",
+    type: "Production deploy",
     href: "https://jishanbuilds.vercel.app",
-    copy: "Production deployment of the main portfolio site through Vercel.",
+    stack: "Vercel / Next.js",
+    copy: "A production deployment of the main portfolio site, built from the same source and served through Vercel's hosting platform.",
+    result: "Provides a second live production link beyond GitHub Pages.",
   },
 ];
 
@@ -287,7 +295,7 @@ export default function MechanicalPortfolio() {
         </a>
         <div>
           <a href="#projects">Projects</a>
-          <a href="#demos">Demos</a>
+          <a href="#work-done">Work Done</a>
           <a href="#skills">Skills</a>
           <a href="#process">Process</a>
           <a href="#contact">Contact</a>
@@ -313,8 +321,8 @@ export default function MechanicalPortfolio() {
             <MagneticButton href="#projects">
               View Projects <ArrowRight size={18} />
             </MagneticButton>
-            <MagneticButton href="#demos" variant="ghost">
-              Demo Sites <Link size={18} />
+            <MagneticButton href="#work-done" variant="ghost">
+              Work Done <Link size={18} />
             </MagneticButton>
             <MagneticButton href="Armaan-Tamboli-Resume.pdf" variant="ghost">
               Download Resume <Download size={18} />
@@ -417,15 +425,15 @@ export default function MechanicalPortfolio() {
         </div>
       </section>
 
-      <section className="section-shell demo-section" id="demos">
+      <section className="section-shell work-done-section" id="work-done">
         <motion.div className="section-heading wide" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.22 }}>
-          <p className="eyebrow">Connected demos</p>
-          <h2>Every live site from the Velora workspace, connected from one main hub.</h2>
+          <p className="eyebrow">Work done</p>
+          <h2>Live websites completed in the Velora workspace, connected from this main hub.</h2>
         </motion.div>
-        <div className="demo-grid">
-          {demoSites.map((site, index) => (
+        <div className="work-done-grid">
+          {completedWork.map((site, index) => (
             <motion.a
-              className="demo-card"
+              className="work-card"
               href={site.href}
               key={site.title}
               target="_blank"
@@ -437,11 +445,20 @@ export default function MechanicalPortfolio() {
               transition={{ duration: 0.65, delay: index * 0.06 }}
               whileHover={{ y: -8, scale: 1.015 }}
             >
-              <span>{site.type}</span>
-              <h3>{site.title}</h3>
-              <p>{site.copy}</p>
+              <div className="work-card-top">
+                <span>{site.type}</span>
+                <small>{String(index + 1).padStart(2, "0")}</small>
+              </div>
+              <div className="work-card-body">
+                <h3>{site.title}</h3>
+                <p>{site.copy}</p>
+              </div>
+              <div className="work-card-meta">
+                <span>{site.stack}</span>
+                <p>{site.result}</p>
+              </div>
               <strong>
-                Open site <ArrowRight size={18} />
+                View demo <ArrowRight size={18} />
               </strong>
             </motion.a>
           ))}
