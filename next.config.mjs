@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const isGithubPages = process.env.GITHUB_PAGES === "true";
-const githubPagesBasePath = process.env.GITHUB_PAGES_BASE_PATH || "/velora-sites";
+const githubPagesBasePath = process.env.GITHUB_PAGES_BASE_PATH || "/velora-web";
 
 const nextConfig = {
   output: "export",

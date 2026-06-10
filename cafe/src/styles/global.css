@@ -32,9 +32,9 @@ body::before {
   inset: -3rem;
   z-index: -1;
   background:
-    url("/assets/web-latte-art.jpg") 15% 10% / 24rem auto no-repeat,
-    url("/assets/web-caffe-latte.jpg") 80% 35% / 22rem auto no-repeat,
-    url("/assets/espresso-top-view.jpg") 34% 88% / 31rem auto no-repeat;
+    url("../assets/web-latte-art.jpg") 15% 10% / 24rem auto no-repeat,
+    url("../assets/web-caffe-latte.jpg") 80% 35% / 22rem auto no-repeat,
+    url("../assets/espresso-top-view.jpg") 34% 88% / 31rem auto no-repeat;
   filter: blur(34px) saturate(0.8) opacity(0.42);
   transform: scale(1.04);
 }

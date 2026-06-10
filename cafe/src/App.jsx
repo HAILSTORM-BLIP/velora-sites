@@ -4,18 +4,20 @@ import { ScrollTrigger } from 'gsap/all'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const assetPath = (path) => `${import.meta.env.BASE_URL}${path}`
+
 const drinks = [
   {
     name: 'Americano',
     note: 'Natural Arabica, 30 ml cup',
     price: '$2.50',
-    image: '/assets/web-latte-art.jpg',
+    image: assetPath('assets/web-latte-art.jpg'),
   },
   {
     name: 'Cappuccino',
     note: 'Coffee 50%, milk 50%, 280 ml',
     price: '$2.50',
-    image: '/assets/cappuccino-cup.jpg',
+    image: assetPath('assets/cappuccino-cup.jpg'),
   },
 ]
 
@@ -83,7 +85,7 @@ export default function App() {
         <div className="video-loader">
           <video
             ref={videoRef}
-            src="/assets/cafe-intro-minimal.mp4"
+            src={assetPath('assets/cafe-intro-minimal.mp4')}
             autoPlay
             muted
             defaultMuted
@@ -123,7 +125,7 @@ export default function App() {
             </div>
           </div>
           <div className="hero-cup">
-            <img src="/assets/web-caffe-latte.jpg" alt="Latte art coffee cup on a cafe table" />
+            <img src={assetPath('assets/web-caffe-latte.jpg')} alt="Latte art coffee cup on a cafe table" />
           </div>
         </section>
 
@@ -162,7 +164,7 @@ export default function App() {
             <a className="small-button" href="#contact">Learn More</a>
           </div>
           <div className="latte-orbit">
-            <img src="/assets/web-caffe-latte.jpg" alt="Latte art with scattered coffee beans" />
+            <img src={assetPath('assets/web-caffe-latte.jpg')} alt="Latte art with scattered coffee beans" />
             <span className="price-badge">$2.50</span>
             {Array.from({ length: 22 }).map((_, index) => (
               <span key={index} className="bean" style={{ '--i': index }} />
@@ -193,7 +195,7 @@ export default function App() {
 
           <div className="phone-card detail-card">
             <span className="back-mark">‹</span>
-            <img src="/assets/cappuccino-cup.jpg" alt="Latte Grand coffee cup" />
+            <img src={assetPath('assets/cappuccino-cup.jpg')} alt="Latte Grand coffee cup" />
             <h3>Latte Grand</h3>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
             <div className="detail-actions"><span>$3.50</span><button type="button">Add to Cart</button></div>

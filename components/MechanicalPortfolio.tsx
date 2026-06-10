@@ -88,6 +88,33 @@ const projects = [
   },
 ];
 
+const demoSites = [
+  {
+    title: "Mechanical Portfolio",
+    type: "Main site",
+    href: "https://hailstorm-blip.github.io/velora-web/",
+    copy: "Premium engineering portfolio with CAD projects, process, skills, and contact flow.",
+  },
+  {
+    title: "Flavored Cafe",
+    type: "Demo site",
+    href: "https://hailstorm-blip.github.io/velora-web/cafe/",
+    copy: "Animated cafe landing page with menu cards, loader video, product visuals, and ordering-style sections.",
+  },
+  {
+    title: "Velora Sites Archive",
+    type: "Repository mirror",
+    href: "https://hailstorm-blip.github.io/velora-sites/",
+    copy: "The consolidated Pages archive that also carries the shared site collection.",
+  },
+  {
+    title: "Vercel Production",
+    type: "Live deployment",
+    href: "https://jishanbuilds.vercel.app",
+    copy: "Production deployment of the main portfolio site through Vercel.",
+  },
+];
+
 const gallery = [
   "CAD render",
   "Exploded view",
@@ -260,6 +287,7 @@ export default function MechanicalPortfolio() {
         </a>
         <div>
           <a href="#projects">Projects</a>
+          <a href="#demos">Demos</a>
           <a href="#skills">Skills</a>
           <a href="#process">Process</a>
           <a href="#contact">Contact</a>
@@ -285,7 +313,10 @@ export default function MechanicalPortfolio() {
             <MagneticButton href="#projects">
               View Projects <ArrowRight size={18} />
             </MagneticButton>
-            <MagneticButton href="/Armaan-Tamboli-Resume.pdf" variant="ghost">
+            <MagneticButton href="#demos" variant="ghost">
+              Demo Sites <Link size={18} />
+            </MagneticButton>
+            <MagneticButton href="Armaan-Tamboli-Resume.pdf" variant="ghost">
               Download Resume <Download size={18} />
             </MagneticButton>
             <MagneticButton href="#contact" variant="ghost">
@@ -301,7 +332,7 @@ export default function MechanicalPortfolio() {
           transition={{ duration: 1.1, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="portrait-shell">
-            <img className="portfolio-preview" src="/assets/portfolio-reference.jpg" alt="Blue portfolio design preview" />
+            <img className="portfolio-preview" src="assets/portfolio-reference.jpg" alt="Blue portfolio design preview" />
             <div className="engineer-silhouette">
               <span className="helmet" />
               <span className="torso" />
@@ -383,6 +414,37 @@ export default function MechanicalPortfolio() {
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section-shell demo-section" id="demos">
+        <motion.div className="section-heading wide" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.22 }}>
+          <p className="eyebrow">Connected demos</p>
+          <h2>Every live site from the Velora workspace, connected from one main hub.</h2>
+        </motion.div>
+        <div className="demo-grid">
+          {demoSites.map((site, index) => (
+            <motion.a
+              className="demo-card"
+              href={site.href}
+              key={site.title}
+              target="_blank"
+              rel="noreferrer"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.22 }}
+              variants={fadeUp}
+              transition={{ duration: 0.65, delay: index * 0.06 }}
+              whileHover={{ y: -8, scale: 1.015 }}
+            >
+              <span>{site.type}</span>
+              <h3>{site.title}</h3>
+              <p>{site.copy}</p>
+              <strong>
+                Open site <ArrowRight size={18} />
+              </strong>
+            </motion.a>
+          ))}
         </div>
       </section>
 

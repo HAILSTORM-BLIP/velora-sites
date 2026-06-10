@@ -35,7 +35,7 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: "true"
-          GITHUB_PAGES_BASE_PATH: "/velora-sites"
+          GITHUB_PAGES_BASE_PATH: "/velora-web"
 
       - name: Setup Node cache for cafe
         uses: actions/setup-node@v4
