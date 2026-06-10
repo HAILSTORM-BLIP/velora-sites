@@ -6,8 +6,9 @@ A shared repository for the websites built in this workspace.
 
 | Site | Source | Stack | GitHub Pages path |
 | --- | --- | --- | --- |
-| Mechanical Portfolio | `app/`, `components/`, `public/` | Next.js static export, React, Tailwind CSS, Three.js, GSAP | `https://hailstorm-blip.github.io/velora-web/` |
+| Velora Main Site | `app/`, `components/`, `public/` | Next.js static export, React, Tailwind CSS, GSAP | `https://hailstorm-blip.github.io/velora-web/` |
 | Flavored Cafe | `cafe/` | Vite, React, GSAP, Three.js | `https://hailstorm-blip.github.io/velora-web/cafe/` |
+| Velora Production | root project | Vercel, Next.js | `https://jishanbuilds.vercel.app/` |
 
 ## Local Development
 

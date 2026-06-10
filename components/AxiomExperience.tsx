@@ -35,12 +35,6 @@ const demoSites = [
     label: "Site collection",
     body: "The public archive for the websites gathered in the Velora workspace.",
   },
-  {
-    title: "Vercel Production",
-    href: "https://jishanbuilds.vercel.app",
-    label: "Production deployment",
-    body: "The production deployment for the Velora website experience.",
-  },
 ];
 
 const chapters = [
@@ -299,7 +293,7 @@ export default function AxiomExperience() {
             </p>
           </div>
 
-          <div className="demo-site-grid mt-16 grid gap-4 md:grid-cols-3">
+          <div className="demo-site-grid mt-16 grid gap-4 md:grid-cols-2">
             {demoSites.map((site, index) => (
               <a className="demo-site-card group" href={site.href} target="_blank" rel="noreferrer" key={site.title}>
                 <div className="flex items-start justify-between gap-5">
