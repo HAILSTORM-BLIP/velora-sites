@@ -88,14 +88,14 @@ const projects = [
   },
 ];
 
-const completedWork = [
+const demoWebsites = [
   {
-    title: "Mechanical Portfolio",
-    type: "Main website",
+    title: "Velora Main Site",
+    type: "Main portal",
     href: "https://hailstorm-blip.github.io/velora-web/",
     stack: "Next.js / Framer Motion / Tailwind",
-    copy: "A polished engineering portfolio with a cinematic hero, animated CAD project carousel, skills dashboard, process timeline, and contact flow.",
-    result: "Built as the central hub for all public Velora demos.",
+    copy: "The main entry point for Velora, built as the central website visitors use to discover every live demo.",
+    result: "Start here to visit the complete demo collection.",
   },
   {
     title: "Flavored Cafe",
@@ -103,7 +103,7 @@ const completedWork = [
     href: "https://hailstorm-blip.github.io/velora-web/cafe/",
     stack: "Vite / React / GSAP",
     copy: "A warm cafe landing page with intro video loading, animated menu cards, product visuals, mobile-ordering style sections, and smooth scroll reveals.",
-    result: "Connected as a live demo from the main portfolio.",
+    result: "Open this demo to view the cafe website experience.",
   },
   {
     title: "Velora Sites Archive",
@@ -111,7 +111,7 @@ const completedWork = [
     href: "https://hailstorm-blip.github.io/velora-sites/",
     stack: "GitHub Pages / Static export",
     copy: "A consolidated public archive that keeps the built websites together, with shared deployment workflow and source organization.",
-    result: "Maintains the complete site collection for review.",
+    result: "Use this link to review the broader site collection.",
   },
   {
     title: "Vercel Production",
@@ -119,7 +119,7 @@ const completedWork = [
     href: "https://jishanbuilds.vercel.app",
     stack: "Vercel / Next.js",
     copy: "A production deployment of the main portfolio site, built from the same source and served through Vercel's hosting platform.",
-    result: "Provides a second live production link beyond GitHub Pages.",
+    result: "Use this link to view the production deployment.",
   },
 ];
 
@@ -295,7 +295,7 @@ export default function MechanicalPortfolio() {
         </a>
         <div>
           <a href="#projects">Projects</a>
-          <a href="#work-done">Work Done</a>
+          <a href="#demo-websites">Demo Websites</a>
           <a href="#skills">Skills</a>
           <a href="#process">Process</a>
           <a href="#contact">Contact</a>
@@ -321,8 +321,8 @@ export default function MechanicalPortfolio() {
             <MagneticButton href="#projects">
               View Projects <ArrowRight size={18} />
             </MagneticButton>
-            <MagneticButton href="#work-done" variant="ghost">
-              Work Done <Link size={18} />
+            <MagneticButton href="#demo-websites" variant="ghost">
+              Demo Websites <Link size={18} />
             </MagneticButton>
             <MagneticButton href="Armaan-Tamboli-Resume.pdf" variant="ghost">
               Download Resume <Download size={18} />
@@ -425,13 +425,22 @@ export default function MechanicalPortfolio() {
         </div>
       </section>
 
-      <section className="section-shell work-done-section" id="work-done">
+      <section className="section-shell work-done-section" id="demo-websites">
         <motion.div className="section-heading wide" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.22 }}>
-          <p className="eyebrow">Work done</p>
-          <h2>Live websites completed in the Velora workspace, connected from this main hub.</h2>
+          <p className="eyebrow">Demo websites</p>
+          <h2>Visit every live website from one main Velora hub.</h2>
+        </motion.div>
+        <motion.div className="demo-hub-panel" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.24 }}>
+          <div>
+            <span>Central directory</span>
+            <h3>Main site for all demos</h3>
+          </div>
+          <p>
+            This page is the starting point. Every demo website, archive page, and production deployment is connected below with a direct live link.
+          </p>
         </motion.div>
         <div className="work-done-grid">
-          {completedWork.map((site, index) => (
+          {demoWebsites.map((site, index) => (
             <motion.a
               className="work-card"
               href={site.href}
