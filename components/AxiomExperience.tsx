@@ -24,6 +24,18 @@ const work = [
 
 const demoSites = [
   {
+    title: "Dentist Website",
+    href: "https://dentist-web-amber.vercel.app",
+    label: "Clinic website demo",
+    body: "A premium dental clinic website for SmileCraft Dental Care with service sections, trust-building copy, and a clean conversion-focused layout.",
+  },
+  {
+    title: "Coaching Classes",
+    href: "https://coatching-classes.vercel.app",
+    label: "Education website demo",
+    body: "A coaching classes website demo built for course discovery, student trust, and quick access to the institute offering.",
+  },
+  {
     title: "Flavored Cafe",
     href: "https://hailstorm-blip.github.io/velora-web/cafe/",
     label: "Cafe website demo",
